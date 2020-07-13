@@ -15,7 +15,7 @@
                 console.log("Hello from within getText()");
                 fetch('sample.txt')
                 .then(function(res){
-                    console.log(res);
+                    console.log(res.text());
                 })
             }
         </script>

@@ -12,6 +12,7 @@
             document.getElementById('getText').addEventListener('click', getText);
 
             function getText() {
+                /*
                 console.log("Hello from within getText()");
                 fetch('sample.txt')
                 .then(function(res){
@@ -19,6 +20,11 @@
                 }).then(function(data){
                     console.log(data);
                 })
+                */
+
+                fetch('sample.txt')
+                .then((res) => return res.text())
+                .then((data) => console.log(data))
             }
         </script>
     </body>

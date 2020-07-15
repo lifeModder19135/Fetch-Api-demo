@@ -15,6 +15,7 @@
             document.getElementById('getText').addEventListener('click', getText);
             document.getElementById('getUsers').addEventListener('click', getUsers);
             document.getElementById('getEndpoint').addEventListener('click', getEndpoint);
+            
             function getText() {
                 /*
                 console.log("Hello from within getText()");
@@ -55,7 +56,29 @@
             }
 
             function getEndpoint() {
-                 
+                 console.log("listening to #getEndpoint");
+                 fetch('http://jsonplaceholder.typicode.com/todos')
+                .then((res)=> res.json())
+                .then((data)=>{
+                    console.log(data[1]);
+                    
+                    let output = '<h2>Todo Items<h2>';
+                    let i = 0;
+                    data.forEach((user)=>{
+                        if(i <= 4){
+                            output+= `
+                            <ul>
+                                <li>ID: ${user.id}</li>
+                                <li>Title: ${user.title}</li>
+                            </ul>
+                            `;
+                            console.log("iteration");
+                            i++;
+                        } else break;
+                       // console.log(output);
+                    });
+                    document.getElementById('output').innerHTML = output;
+                })
             }
         </script>
     </body>

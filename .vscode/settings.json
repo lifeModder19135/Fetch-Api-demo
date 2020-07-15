@@ -1,0 +1,6 @@
+{
+    "editor.fontSize": 17,
+    "editor.tabSize": 5,
+    "editor.cursorStyle": "line-thin",
+    "terminal.integrated.automationShell.windows": ""
+}

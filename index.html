@@ -59,26 +59,30 @@
                  console.log("listening to #getEndpoint");
                  fetch('http://jsonplaceholder.typicode.com/todos')
                 .then((res)=> res.json())
-                .then((data)=>{
-                    console.log(data[1]);
+                .then((data)=>{    
                     
                     let output = '<h2>Todo Items<h2>';
-                    let i = 0;
-                    data.forEach((user)=>{
-                        if(i <= 4){
+                    let status;
+
+                    for (let task of data){
+                        if(task.id < 6){
+                            if(task.completed === true) {
+                                this.status="finished";
+                            } else {
+                                this.status="unfinished";
+                            }
                             output+= `
                             <ul>
-                                <li>ID: ${user.id}</li>
-                                <li>Title: ${user.title}</li>
+                                <li>ID: ${task.id}</li>
+                                <li>Title: ${task.title}</li>
+                                <li>Status: ${this.status}</li>
                             </ul>
                             `;
-                            console.log("iteration");
-                            i++;
-                        } else break;
-                       // console.log(output);
-                    });
+                        }
+                    }
+
                     document.getElementById('output').innerHTML = output;
-                })
+                });
             }
         </script>
     </body>

@@ -12,31 +12,32 @@
         <button id="getEndpoint">Get Data From API Endpoint</button>
         <div id="output"></div>
         <script>
+
+            //click listeners for all three buttons
             document.getElementById('getText').addEventListener('click', getText);
             document.getElementById('getUsers').addEventListener('click', getUsers);
             document.getElementById('getEndpoint').addEventListener('click', getEndpoint);
             
+            //called when 'Get Text' button is clicked
             function getText() {
-                /*
-                console.log("Hello from within getText()");
-                fetch('sample.txt')
-                .then(function(res){
-                  return res.text();
-                }).then(function(data){
-                    console.log(data);
-                })
-                */
-
+                //retrieve text from sample.txt file
                 fetch('sample.txt')
                 .then((res) => res.text())
                 .then((data) => {
+                    //place the resulting data in DOM @ element with id of output
                     document.getElementById('output').innerHTML = data;
                 })
+                //handles errors during retrieval
                 .catch((err) => console.log(err))
             }
+
+            //called when 'Get Users' button is clicked
             function getUsers() {
+                //retrieve data from users.json file
                 fetch('users.json')
+                //format response to JSON
                 .then((res)=> res.json())
+                //plug data into html template
                 .then((data)=>{
                     console.log(data);
                     
@@ -49,28 +50,36 @@
                             <li>Email: ${user.email}</li>
                         </ul>
                         `;
-                       // console.log(output);
                     });
+                    //add autofilled template to DOM
                     document.getElementById('output').innerHTML = output;
                 })
             }
 
+            //called when 'Get Users' button is clicked
             function getEndpoint() {
+                //Test log
                  console.log("listening to #getEndpoint");
+                 //retrieve data from API endpoint
                  fetch('http://jsonplaceholder.typicode.com/todos')
+                 //format response to JSON
                 .then((res)=> res.json())
+                //Manipulate data -- plug ids and titles into template with current value of status variable
                 .then((data)=>{    
                     
                     let output = '<h2>Todo Items<h2>';
+                    //string value dependant on value of task.completed'
                     let status;
 
                     for (let task of data){
                         if(task.id < 6){
+                            //here is where status var is set
                             if(task.completed === true) {
                                 this.status="finished";
                             } else {
                                 this.status="unfinished";
                             }
+                            //here is the template for each iteration
                             output+= `
                             <ul>
                                 <li>ID: ${task.id}</li>
@@ -80,7 +89,7 @@
                             `;
                         }
                     }
-
+                    //Paint the DOM with the resulting template
                     document.getElementById('output').innerHTML = output;
                 });
             }
